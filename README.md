@@ -1,5 +1,5 @@
 # Wanderlust
-[Visit the Website](https://adi-chikhale21.github.io/Simon-s-Game/)
+[Visit the Website](https://majorproject-5u7r.onrender.com/listings)
 
 This project is a full-stack accommodation platform, inspired by the functionalities of popular services like Airbnb. It provides a seamless and user-friendly interface, allowing users to search, create, and manage listings with ease.
 
