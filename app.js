@@ -81,23 +81,31 @@ app.use((req,res,next) => {
 
 app.get('/geocode', async (req, res) => {
     const address = req.query.address;
+    console.log('Received address:', address);  // Debug log
     if (!address) {
+        console.error('Address is required');
         return res.status(400).send({ error: 'Address is required' });
     }
     try {
         const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+            headers: {
+                'User-Agent': 'adi216/1.0 (adityachikhale19@gmail.com)' // Replace with your app name and email
+            },
             params: {
                 format: 'json',
                 q: address
             }
         });
         if (!response.data || response.data.length === 0) {
+            console.error('No results found for the provided address');
             return res.status(404).send({ error: 'No results found for the provided address' });
         }
         const { lat, lon } = response.data[0];
+        console.log('Geocoding response:', { latitude: lat, longitude: lon });  // Debug log
         res.send({ latitude: lat, longitude: lon });
     } catch (error) {
-        res.status(500).send({ error: 'Error fetching geocoding data: ' + error.message });
+        console.error('Error fetching geocoding data:', error.message, error.response?.data);  // Log more details
+        res.status(error.response?.status || 500).send({ error: 'Error fetching geocoding data: ' + error.message });
     }
 });
 
