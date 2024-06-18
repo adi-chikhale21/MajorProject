@@ -1,20 +1,34 @@
 const listing = require("../models/Schema")
 const ExpressError = require("../utils/ExpressError.js");
 const axios = require('axios');
-const mapToken = process.env.Map_Token
 
 async function geocode(address) {
     try {
-      const response = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
-      if (!response.data || response.data.length === 0) {
-        throw new Error('No results found for the provided address');
-      }
-      const { lat, lon } = response.data[0];
-      return { latitude: lat, longitude: lon };
+        if (!address) {
+            throw new Error('Address is required');
+        }
+        
+        // Determine the base URL based on the environment
+        const baseUrl = process.env.NODE_ENV === 'production'
+            ? 'https://majorproject-5u7r.onrender.com'
+            : 'http://localhost:8080';
+        
+        const response = await axios.get(`${baseUrl}/geocode`, {
+            params: {
+                address: encodeURIComponent(address)
+            }
+        });
+        
+        if (!response.data || !response.data.latitude || !response.data.longitude) {
+            throw new Error('No results found for the provided address');
+        }
+        
+        const { latitude, longitude } = response.data;
+        return { latitude, longitude };
     } catch (error) {
-      throw new Error('Error fetching geocoding data: ' + error.message);
+        throw new Error('Error fetching geocoding data: ' + error.message);
     }
-  }
+}
 
 module.exports.Index = async (req,res,next) => {
     const allListing = await listing.find({});

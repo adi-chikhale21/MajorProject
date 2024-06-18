@@ -20,6 +20,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const axios = require('axios');
 
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/reviews.js");
@@ -78,6 +79,28 @@ app.use((req,res,next) => {
     next();
 })
 
+app.get('/geocode', async (req, res) => {
+    const address = req.query.address;
+    if (!address) {
+        return res.status(400).send({ error: 'Address is required' });
+    }
+    try {
+        const response = await axios.get('https://nominatim.openstreetmap.org/search', {
+            params: {
+                format: 'json',
+                q: address
+            }
+        });
+        if (!response.data || response.data.length === 0) {
+            return res.status(404).send({ error: 'No results found for the provided address' });
+        }
+        const { lat, lon } = response.data[0];
+        res.send({ latitude: lat, longitude: lon });
+    } catch (error) {
+        res.status(500).send({ error: 'Error fetching geocoding data: ' + error.message });
+    }
+});
+
 app.get("/demouser",async (req,res) => {
     let fakeuser = new User({
         email: "addc@gmail.com",
@@ -90,6 +113,8 @@ app.get("/demouser",async (req,res) => {
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",usersRouter);
+
+
 
 // app.get("/testinglisting", async (req,res) => {
 //     const data1 = new listing ({
