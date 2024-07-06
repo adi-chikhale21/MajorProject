@@ -8,23 +8,25 @@ async function geocode(address) {
             throw new Error('Address is required');
         }
         
-        // Determine the base URL based on the environment
         const baseUrl = process.env.NODE_ENV === 'production'
             ? 'https://majorproject-5u7r.onrender.com'
             : 'http://localhost:8080';
         
+        // Encode the address component before sending the request
+        const encodedAddress = address;
+
         const response = await axios.get(`${baseUrl}/geocode`, {
             params: {
-                address: encodeURIComponent(address)
+                address: encodedAddress
             }
         });
         
-        if (!response.data || !response.data.latitude || !response.data.longitude) {
+        if (!response.data || response.data.length === 0) {
             throw new Error('No results found for the provided address');
         }
         
-        const { latitude, longitude } = response.data;
-        return { latitude, longitude };
+        const { latitude, longitude } = response.data; // Assuming response is an array with coordinates
+        return { latitude, longitude};
     } catch (error) {
         throw new Error('Error fetching geocoding data: ' + error.message);
     }
@@ -41,7 +43,7 @@ module.exports.renderCreateForm = (req,res) => {
 }
 
 module.exports.createListing = async (req,res,next) => {
-   let coordinates=  await geocode(`${req.body.Listing.location}`)
+   const coordinates=  await geocode(`${req.body.Listing.location}`);
   
     let url = req.file.path;
     let filename = req.file.filename;

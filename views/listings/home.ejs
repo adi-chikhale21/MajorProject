@@ -35,51 +35,89 @@
         display: flex;
         align-items: center;
     }
+
+    @media (max-width: 768px){
+        #tax-toggle{
+            display: none;
+        }
+
+        .dec{
+            display: none;
+        }
+
+        .inc div i{
+            font-size: 1.5rem;
+            
+        }
+        #filters{
+        justify-content: space-between;
+        height: 80px;
+        }
+
+        
+}
+
+@media (max-width: 768px) {
+    .row-cols-md-2>* {
+        flex: 1 1 50%;
+    }
+
+    .container, .container-sm {
+        max-width: 640px;
+    }
+}
+
+@media (max-width: 480px) {
+    .row-cols-sm-1>* {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
 </style>
 <body>
     <!-- <h3>All Listings</h3> -->
     <div id="filters">
-        <div class="filter">
+        <div class="filter inc">
             <div><i class="fa-solid fa-fire-flame-curved"></i></div>
             <p>Trending</p>
         </div>
-        <div class="filter">
+        <div class="filter inc">
             <div><i class="fa-solid fa-umbrella-beach"></i></div>
             <p>Beach</p>
         </div>
-        <div class="filter">
+        <div class="filter inc">
             <div><i class="fa-brands fa-fort-awesome"></i></div>
             <p>Castles</p>
         </div>
-        <div class="filter">
+        <div class="filter inc">
             <div><i class="fa-solid fa-sailboat"></i></div>
             <p>Boats</p>
         </div>
-        <div class="filter">
+        <div class="filter dec">
             <div><i class="fa-solid fa-mountain-city"></i></div>
             <p>Countryside</p>
         </div>
-        <div class="filter">
+        <div class="filter inc">
             <div><i class="fa-solid fa-bed"></i></div>
             <p>Rooms</p>
         </div>
-        <div class="filter">
+        <div class="filter dec">
             <div><i class="fa-solid fa-baseball-bat-ball"></i></div>
             <p>Play</p>
         </div>
-        <div class="filter">
+        <div class="filter dec">
             <div><i class="fa-solid fa-campground"></i></div>
             <p>A-frames</p>
         </div>
-        <div class="filter">
+        <div class="filter dec">
             <div><i class="fa-solid fa-cow"></i></div>
             <p>Farm</p>
         </div>
-        <div class="filter">
+        <div class="filter dec">
             <div><i class="fa-solid fa-snowflake"></i></div>
             <p>Artic</p>
         </div>
-        <div class="filter">
+        <div class="filter dec">
             <div><i class="fa-solid fa-person-swimming"></i></div>
             <p>Pools</p>
         </div>

@@ -81,7 +81,6 @@ app.use((req,res,next) => {
 
 app.get('/geocode', async (req, res) => {
     const address = req.query.address;
-    console.log('Received address:', address);  // Debug log
     if (!address) {
         console.error('Address is required');
         return res.status(400).send({ error: 'Address is required' });
@@ -101,13 +100,13 @@ app.get('/geocode', async (req, res) => {
             return res.status(404).send({ error: 'No results found for the provided address' });
         }
         const { lat, lon } = response.data[0];
-        console.log('Geocoding response:', { latitude: lat, longitude: lon });  // Debug log
         res.send({ latitude: lat, longitude: lon });
     } catch (error) {
         console.error('Error fetching geocoding data:', error.message, error.response?.data);  // Log more details
         res.status(error.response?.status || 500).send({ error: 'Error fetching geocoding data: ' + error.message });
     }
 });
+
 
 app.get("/demouser",async (req,res) => {
     let fakeuser = new User({
