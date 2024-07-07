@@ -1,12 +1,61 @@
 <% layout("/layouts/boilerplate") %>
 
+<style>
+    .responsive-login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .responsive-login-title {
+        text-align: center;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .responsive-login-form {
+        width: 100%;
+    }
+
+    .responsive-login-form .form-control {
+        width: 100%;
+    }
+
+
+    @media (max-width: 768px) {
+        .responsive-login-container {
+            padding: 10px;
+        }
+
+        .responsive-login-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .responsive-login-container {
+            padding: 5px;
+        }
+
+        .responsive-login-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
 <div class="row">
-    <h1 class="col-6 offset-3 mb-3">Login</h1>
-    <div class="col-6 offset-3">
-        <form method="POST" action="/login" novalidate class="needs-validation">
+    <h1 class="col-6 mb-3 responsive-login-title">Login</h1>
+    <div class="col-6 offset-3 responsive-login-container">
+        <form method="POST" action="/login" novalidate class="needs-validation responsive-login-form">
             <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input name="username" type="text" class="form-control" id="username" required />
+                <label for="username" class="form-label">Username</label>
+                <input name="username" type="text" class="form-control" id="username" required />
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>

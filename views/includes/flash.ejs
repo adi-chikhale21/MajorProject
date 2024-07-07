@@ -1,12 +1,29 @@
+<style>
+    .custom-alert {
+        margin-top: 20px;
+        border-radius: 8px;
+        padding: 1rem;
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+        .custom-alert {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+</style>
+
 <% if(success && success.length){ %>
-    <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
+    <div class="alert alert-success alert-dismissible fade show col-6 offset-3 custom-alert" role="alert">
         <%= success %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <% } %>
 
 <% if(error && error.length){ %>
-    <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 custom-alert" role="alert">
         <%= error %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

@@ -1,7 +1,43 @@
 <% layout("/layouts/boilerplate") %>
 
+<style>
+    .responsive-alert-container {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        padding: 20px;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .responsive-alert {
+        width: 100%;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .responsive-alert-container {
+            padding: 10px;
+        }
+
+        .responsive-alert {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .responsive-alert-container {
+            padding: 5px;
+        }
+
+        .responsive-alert {
+            font-size: 0.875rem;
+        }
+    }
+</style>
+
 <div class="row mt-3">
-    <div class="alert alert-danger col-6 offset-3" role="alert">
-        <p class="row-heading"><%= message %></p>
-      </div>
+    <div class="alert alert-danger col-6 offset-3 responsive-alert-container" role="alert">
+        <p class="responsive-alert"><%= message %></p>
+    </div>
 </div>
