@@ -1,103 +1,104 @@
 <style>
-  .search-btn {
-      background-color: #fe424d;
-      color: white;
-      border-radius: 25px;
-      padding: 0 1rem;
-      width: 10rem;
-  }
-
-  .search-btn i {
-      margin-right: 0.5rem;
-  }
-
-  .search-btn:hover {
-      background-color: #fe424d;
-      color: white;
-  }
-
-  .search-input {
-      border-radius: 25px;
-      padding: 0.5rem 1.5rem;
-  }
-
-  @media (max-width: 768px) {
-      .search-input {
-          width: 100%;
-      }
-
-      .search-btn {
-          width: 50%;
-          padding: 0px;
-      }
-
-      #ayh, #explore{
-            display: none !important;
-  }
-
-}
-
-@media (max-width: 480px) {
-    .search-btn, #sign{
-      display: none;
+    .search-btn {
+        background-color: #fe424d;
+        color: white;
+        border-radius: 25px;
+        padding: 0 1rem;
+        width: 10rem;
     }
 
-    #login-link {
-                position: relative;
-            }
+    .search-btn i {
+        margin-right: 0.5rem;
+    }
 
-            #login-link::before {
-                content: "\f007"; /* Unicode for the user icon */
-                font-family: "Font Awesome 5 Free";
-                font-weight: 900;
-                display: inline-block;
-                font-size: 16px;
-            }
+    .search-btn:hover {
+        background-color: #fe424d;
+        color: white;
+    }
 
-            #login-link b {
-                display: none;
-            }
+    .search-input {
+        border-radius: 25px;
+        padding: 0.5rem 1.5rem;
+    }
 
-}
+    @media (max-width: 768px) {
+        .search-input {
+            width: 100%;
+        }
+
+        .search-btn {
+            width: 50%;
+            padding: 0px;
+        }
+
+        #ayh, #explore {
+            display: none !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .search-btn, #sign {
+            display: none;
+        }
+
+        #login-link {
+            position: relative;
+        }
+
+        #login-link::before {
+            content: "\f007"; /* Unicode for the user icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        #login-link b {
+            display: none;
+        }
+    }
+
+    
 </style>
 
 <nav class="navbar navbar-expand bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-      <div class="navbar-nav">
-          <a class="nav-link" id="explore" href="/listings">Explore</a>
-      </div>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+        <div class="navbar-nav">
+            <a class="nav-link" id="explore" href="/listings">Explore</a>
+        </div>
 
-      <div class="navbar-nav ms-auto">
-          <form class="d-flex flex-grow-1" role="search">
-              <input class="search-input form-control me-2" id="searchinp" type="search" placeholder="Search Destination" aria-label="Search">
-              <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-          </form>
-      </div>
+        <div class="navbar-nav ms-auto">
+            <form class="d-flex flex-grow-1" role="search">
+                <input class="search-input form-control me-2" id="searchinp" type="search" placeholder="Search Destination" aria-label="Search">
+                <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+            </form>
+        </div>
 
-      <div class="navbar-nav ms-auto">
-          <a class="nav-link" id="ayh" href="/listings/new">Airbnb your home</a>
-          <% if(!currUser) { %>
-          <a class="nav-link" id="sign" aria-current="page" href="/signup"><b>Sign Up</b></a>
-          <a class="nav-link" id="login-link" href="/login"><b>Log In</b></a>
-          <% } %>
-          <% if(currUser) { %>
-          <a class="nav-link" href="/logout"><b>Log Out</b></a>
-          <% } %>
-      </div>
-  </div>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" id="ayh" href="/listings/new">Airbnb your home</a>
+            <% if(!currUser) { %>
+            <a class="nav-link" id="sign" aria-current="page" href="/signup"><b>Sign Up</b></a>
+            <a class="nav-link" id="login-link" href="/login"><b>Log In</b></a>
+            <% } %>
+            <% if(currUser) { %>
+            <a class="nav-link" href="/logout"><b>Log Out</b></a>
+            <% } %>
+        </div>
+    </div>
 </nav>
 
-<script>
-  function updatePlaceholder() {
-      const searchInput = document.querySelector('.search-input');
-      if (window.innerWidth <= 480) {
-          searchInput.placeholder = 'Search';
-      } else {
-          searchInput.placeholder = 'Search Destination';
-      }
-  }
 
-  window.addEventListener('resize', updatePlaceholder);
-  window.addEventListener('load', updatePlaceholder);
+<script>
+    function updatePlaceholder() {
+        const searchInput = document.querySelector('.search-input');
+        if (window.innerWidth <= 480) {
+            searchInput.placeholder = 'Search';
+        } else {
+            searchInput.placeholder = 'Search Destination';
+        }
+    }
+
+    window.addEventListener('resize', updatePlaceholder);
+    window.addEventListener('load', updatePlaceholder);
 </script>

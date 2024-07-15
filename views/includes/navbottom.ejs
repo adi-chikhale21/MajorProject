@@ -1,0 +1,91 @@
+<style>
+    /* Bottom Navigation Bar for mobile */
+    .bottom-nav {
+        display: none; /* Hidden by default */
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e7e7e7;
+        z-index: 1000;
+    }
+
+    .bottom-nav .nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .bottom-nav .nav-link {
+        display: none;
+        
+    }
+
+    .bottom-nav .nav-link i {
+        font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .bottom-nav .nav-link{
+            display: flex;
+            flex-direction: column;
+        align-items: center;
+        color: #000;
+        font-size: 14px;
+        }
+    }
+</style>
+
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+    <div class="nav-item">
+        <a class="nav-link" href="/listings"><i class="fa-solid fa-search"></i><span>Explore</span></a>
+    </div>
+    <div class="nav-item">
+        <a class="nav-link" href="/listings/new"><i class="fa-solid fa-house"></i><span>Airbnb</span></a>
+    </div>
+    <div class="nav-item">
+        <a class="nav-link" href="/wishlist"><i class="fa-solid fa-heart"></i><span>Wishlist</span></a>
+    </div>
+</nav>
+
+<script>
+    let lastScrollTop = 0;
+    const bottomNav = document.querySelector('.bottom-nav');
+
+    window.addEventListener('scroll', () => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+            // Downscroll
+            bottomNav.style.display = 'none';
+        } else {
+            // Upscroll
+            bottomNav.style.display = 'flex';
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768) {
+            bottomNav.style.display = 'flex';
+        } else {
+            bottomNav.style.display = 'none';
+        }
+    });
+
+    window.addEventListener('load', () => {
+        if (window.innerWidth <= 768) {
+            bottomNav.style.display = 'flex';
+        } else {
+            bottomNav.style.display = 'none';
+        }
+    });
+</script>
